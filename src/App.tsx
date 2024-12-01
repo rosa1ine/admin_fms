@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import AdminLayout from './layout/AdminLayout';
+import Overview from './dashboard/Overview';
+import PendingFarmer from './dashboard/PendingFarmer';
+import ApprovedFarmer from './dashboard/ApprovedFarmer';
+import BuyerManagement from './dashboard/BuyerManagement';
+import ProductManagement from './dashboard/ProductManagement';
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute'; // Ensure correct path
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {/* Protected Admin Routes */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Overview />} />
+        <Route path="pending-farmers" element={<PendingFarmer />} />
+        <Route path="approved-farmers" element={<ApprovedFarmer />} />
+        <Route path="buyers" element={<BuyerManagement />} />
+        <Route path="products" element={<ProductManagement />} />
+      </Route>
+
+      {/* Public Route for Login */}
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<Navigate to="/" />} /> {/* Fallback */}
+    </Routes>
   );
-}
+};
 
 export default App;

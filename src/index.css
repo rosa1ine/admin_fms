@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* Remove margins and padding from root elements */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Ensure no scrollbars unless necessary */
+}
+
+/* Set the background to the full viewport */
+body {
+  background: url('/farming.jpg') no-repeat center center fixed; /* Replace with your image path */
+  background-size: cover;
+  font-family: Arial, sans-serif;
 }
